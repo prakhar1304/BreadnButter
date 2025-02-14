@@ -79,8 +79,8 @@ const Home = () => {
           style={styles.poster}
         />
 
-        <View style={{ backgroundColor: "red", paddingHorizontal: 20 }}>
-          <Text style={{ fontSize: 20 }}>categories</Text>
+        <View style={{ paddingHorizontal: 21, marginBottom: 10 }}>
+          <Text style={{ fontSize: 20 }}>Categories</Text>
         </View>
 
         {/* Categories */}

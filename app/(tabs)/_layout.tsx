@@ -12,7 +12,8 @@ const TabLayout = () => {
   useEffect(() => {
     const getUserRole = async () => {
       try {
-        const storedRole = await AsyncStorage.getItem("userRole");
+        const storedRole = await AsyncStorage.getItem("role");
+        console.log(storedRole);
         if (storedRole) {
           setRole(storedRole);
         }
