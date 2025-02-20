@@ -30,6 +30,38 @@ const items = [
     image:
       "https://th.bing.com/th/id/OIP.hSfIIiyfbb7HyzJ5mvO2CAHaHa?rs=1&pid=ImgDetMain",
   },
+  {
+    id: "3",
+    name: "Smart Watch",
+    price: "$129.99",
+    rating: 4.2,
+    image:
+      "https://th.bing.com/th/id/OIP.hSfIIiyfbb7HyzJ5mvO2CAHaHa?rs=1&pid=ImgDetMain",
+  },
+  {
+    id: "4",
+    name: "Smart Watch",
+    price: "$129.99",
+    rating: 4.2,
+    image:
+      "https://th.bing.com/th/id/OIP.hSfIIiyfbb7HyzJ5mvO2CAHaHa?rs=1&pid=ImgDetMain",
+  },
+  {
+    id: "5",
+    name: "Smart Watch",
+    price: "$129.99",
+    rating: 4.2,
+    image:
+      "https://th.bing.com/th/id/OIP.hSfIIiyfbb7HyzJ5mvO2CAHaHa?rs=1&pid=ImgDetMain",
+  },
+  {
+    id: "6",
+    name: "Smart Watch",
+    price: "$129.99",
+    rating: 4.2,
+    image:
+      "https://th.bing.com/th/id/OIP.hSfIIiyfbb7HyzJ5mvO2CAHaHa?rs=1&pid=ImgDetMain",
+  },
   // Add more items as needed
 ];
 
@@ -46,83 +78,83 @@ const Home = () => {
   return (
     <View style={styles.container}>
       {/* Header */}
-
       <StatusBar backgroundColor={"#4c669f"} />
-      <LinearGradient
-        colors={["#4c669f", "#3b5998", "#192f6a"]}
-        style={styles.header}
-      >
-        <Text style={styles.headerText}>Discover</Text>
-      </LinearGradient>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Search Bar */}
-        <View style={styles.searchBarContainer}>
-          <Feather
-            name="search"
-            size={20}
-            color="#A0A0A0"
-            style={styles.searchIcon}
-          />
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search products..."
-            placeholderTextColor="#A0A0A0"
-          />
-        </View>
+      <FlatList
+        ListHeaderComponent={
+          <>
+            <LinearGradient
+              colors={["#4c669f", "#3b5998", "#192f6a"]}
+              style={styles.header}
+            >
+              <Text style={styles.headerText}>Discover</Text>
+            </LinearGradient>
+            {/* Search Bar */}
+            <View style={styles.searchBarContainer}>
+              <Feather
+                name="search"
+                size={20}
+                color="#A0A0A0"
+                style={styles.searchIcon}
+              />
+              <TextInput
+                style={styles.searchBar}
+                placeholder="Search products..."
+                placeholderTextColor="#A0A0A0"
+              />
+            </View>
 
-        {/* Poster */}
-        <Image
-          source={{
-            uri: "https://img.freepik.com/premium-vector/realistic-horizontal-sale-banner_23-2150277668.jpg",
-          }}
-          style={styles.poster}
-        />
+            {/* Poster */}
+            <Image
+              source={{
+                uri: "https://img.freepik.com/premium-vector/realistic-horizontal-sale-banner_23-2150277668.jpg",
+              }}
+              style={styles.poster}
+            />
 
-        <View style={{ paddingHorizontal: 21, marginBottom: 10 }}>
-          <Text style={{ fontSize: 20 }}>Categories</Text>
-        </View>
+            <View style={{ paddingHorizontal: 21, marginBottom: 10 }}>
+              <Text style={{ fontSize: 20 }}>Categories</Text>
+            </View>
 
-        {/* Categories */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.categoryContainer}
-        >
-          {categories.map((category, index) => (
-            <TouchableOpacity key={index}>
-              <LinearGradient
-                colors={["#FF9966", "#FF5E62"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.categoryItem}
-              >
-                <Text style={styles.categoryText}>{category}</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        {/* Items Grid */}
-        <FlatList
-          data={items}
-          numColumns={2}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity style={styles.itemCard}>
-              <Image source={{ uri: item.image }} style={styles.itemImage} />
-              <View style={styles.itemDetails}>
-                <Text style={styles.itemName}>{item.name}</Text>
-                <Text style={styles.itemPrice}>{item.price}</Text>
-                <View style={styles.ratingContainer}>
-                  <Feather name="star" size={14} color="#FFD700" />
-                  <Text style={styles.itemRating}>{item.rating}</Text>
-                </View>
+            {/* Categories */}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.categoryContainer}
+            >
+              {categories.map((category, index) => (
+                <TouchableOpacity key={index}>
+                  <LinearGradient
+                    colors={["#FF9966", "#FF5E62"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.categoryItem}
+                  >
+                    <Text style={styles.categoryText}>{category}</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </>
+        }
+        data={items}
+        numColumns={2}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.itemCard}>
+            <Image source={{ uri: item.image }} style={styles.itemImage} />
+            <View style={styles.itemDetails}>
+              <Text style={styles.itemName}>{item.name}</Text>
+              <Text style={styles.itemPrice}>{item.price}</Text>
+              <View style={styles.ratingContainer}>
+                <Feather name="star" size={14} color="#FFD700" />
+                <Text style={styles.itemRating}>{item.rating}</Text>
               </View>
-            </TouchableOpacity>
-          )}
-        />
-      </ScrollView>
+            </View>
+          </TouchableOpacity>
+        )}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };
