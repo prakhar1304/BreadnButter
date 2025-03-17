@@ -21,6 +21,7 @@
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/material-top-tabs": "^7.1.0",
     "@react-navigation/native": "^7.0.14",
+    "@reduxjs/toolkit": "^2.6.1",
     "dotenv": "^16.4.7",
     "expo": "~52.0.33",
     "expo-blur": "~14.0.3",
@@ -50,6 +51,8 @@
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
+    "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

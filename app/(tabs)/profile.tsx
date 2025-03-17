@@ -7,6 +7,7 @@ import {
   Image,
   SafeAreaView,
   StyleSheet,
+  StatusBar,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -17,11 +18,14 @@ import {
 } from "@expo/vector-icons";
 import Colors from "@/src/const/color";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Link, router, useRouter } from "expo-router";
+// import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 type IconProps = {
   icon: string;
   label: string;
   IconComponent: any;
+  route_name?: any;
 };
 
 const OrderStatusButton: React.FC<IconProps> = ({
@@ -37,19 +41,30 @@ const OrderStatusButton: React.FC<IconProps> = ({
   </TouchableOpacity>
 );
 
-const ActionButton: React.FC<IconProps> = ({ icon, label, IconComponent }) => (
-  <TouchableOpacity style={styles.actionButton}>
+const ActionButton: React.FC<IconProps> = ({
+  icon,
+  label,
+  IconComponent,
+  route_name,
+}) => (
+  <TouchableOpacity
+    onPress={() => router.push({ route_name })}
+    style={styles.actionButton}
+  >
     <IconComponent name={icon} size={24} color={Colors.primary} />
     <Text style={styles.actionLabel}>{label}</Text>
   </TouchableOpacity>
 );
 
 const ProfileScreen: React.FC = () => {
+  const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
     userId: "",
     role: "",
   });
+
+  const [role, setRole] = useState();
 
   useEffect(() => {
     const getData = async () => {
@@ -65,6 +80,7 @@ const ProfileScreen: React.FC = () => {
           userId: data["USERID"] || "No User ID",
           role: data["role"] || "user",
         });
+        console.log("afaf", UserDetail);
       } catch (error) {
         console.log(error);
       }
@@ -72,8 +88,25 @@ const ProfileScreen: React.FC = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    const getUserRole = async () => {
+      try {
+        const storedRole = await AsyncStorage.getItem("role");
+        console.log(storedRole);
+        if (storedRole) {
+          setRole(storedRole);
+        }
+      } catch (error) {
+        console.error("Failed to fetch role from AsyncStorage", error);
+      }
+    };
+
+    getUserRole();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={"light-content"} backgroundColor={Colors.primary} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.headerContainer}>
           <LinearGradient
@@ -96,7 +129,7 @@ const ProfileScreen: React.FC = () => {
         </View>
 
         <View style={styles.profileInfo}>
-          <Text style={styles.name}>John Smith</Text>
+          <Text style={styles.name}>{userData.userId}</Text>
           <Text style={styles.email}>{userData.email}</Text>
         </View>
 
@@ -139,6 +172,15 @@ const ProfileScreen: React.FC = () => {
             label="Notifications"
             IconComponent={MaterialIcons}
           />
+
+          <ActionButton
+            icon="admin-panel-settings"
+            label="Admin panel"
+            IconComponent={MaterialIcons}
+            route_name={""}
+            // <MaterialIcons name="admin-panel-settings" size={24} color="black" />
+          />
+          <Link href={"/(admin)/adminScreen"}>admin</Link>
         </View>
       </ScrollView>
     </SafeAreaView>

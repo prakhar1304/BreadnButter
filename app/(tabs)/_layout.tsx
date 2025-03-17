@@ -25,9 +25,6 @@ const TabLayout = () => {
     getUserRole();
   }, []);
 
-  // Dynamically render the 'adminScreen' based on role
-  const renderAdminTab = role === "admin";
-
   return (
     <Tabs
       screenOptions={{
@@ -48,7 +45,7 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="list"
+        name="cart"
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -67,20 +64,6 @@ const TabLayout = () => {
           ),
         }}
       />
-      {renderAdminTab && (
-        <Tabs.Screen
-          name="adminScreen"
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="shield-account"
-                color={color}
-                size={size}
-              />
-            ),
-          }}
-        />
-      )}
     </Tabs>
   );
 };
